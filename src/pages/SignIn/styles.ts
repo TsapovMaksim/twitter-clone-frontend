@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles(theme => ({
   wrapper: {
     height: '100vh',
   },
@@ -49,4 +49,13 @@ export const useStyles = makeStyles({
     fontWeight: 'bold',
     marginBottom: 15,
   },
-});
+  loginSideField: {
+    marginBottom: 18,
+  },
+  registerField: {
+    marginBottom: theme.spacing(5),
+  },
+  loginFormControl: {
+    marginBottom: theme.spacing(2),
+  },
+}));

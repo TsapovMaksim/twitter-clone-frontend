@@ -7,5 +7,5 @@ export const useToggle = (intialState = false) => {
     setIsOpen(!isOpen);
   };
 
-  return [isOpen, handleOpen];
+  return [isOpen, handleOpen] as const;
 };
