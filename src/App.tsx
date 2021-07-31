@@ -1,9 +1,9 @@
-import { Button } from '@material-ui/core';
+import SignIn from './pages/SignIn';
 
 function App() {
   return (
     <div className="App">
-      <Button variant="contained">Contained Button</Button>
+      <SignIn />
     </div>
   );
 }
