@@ -1,19 +1,15 @@
 import { FC } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-} from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from '@material-ui/core/IconButton';
 
 import CloseIcon from '@material-ui/icons/Close';
-import { useStyles } from '../../pages/SignIn/styles';
 
 interface Props {
   visible?: boolean;
   title: string;
   onClose: () => void;
-  styles?: ReturnType<typeof useStyles>;
 }
 
 const ModalBlock: FC<Props> = ({ visible, children, title, onClose }) => {

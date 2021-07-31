@@ -90,7 +90,6 @@ const SignIn: FC<Props> = ({}) => {
         <ModalBlock
           visible={visibleModal === 'signIn'}
           onClose={handleCloseModal}
-          styles={styles}
           title="Войти в аккаунт"
         >
           <FormControl
@@ -137,7 +136,6 @@ const SignIn: FC<Props> = ({}) => {
         <ModalBlock
           visible={visibleModal === 'signUp'}
           onClose={handleCloseModal}
-          styles={styles}
           title="Создайте учетную запись"
         >
           <FormControl
