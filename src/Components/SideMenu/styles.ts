@@ -81,4 +81,7 @@ export const useStyles = makeStyles(theme => ({
       },
     },
   },
+  addTweetFormWrapper: {
+    width: 450,
+  },
 }));

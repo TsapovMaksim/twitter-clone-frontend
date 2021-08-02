@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,11 +17,14 @@ import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import CreateIcon from '@material-ui/icons/Create';
 import { useStyles } from './styles';
+import ModalBlock from '../ModalBlock';
+import AddTweetForm from '../AddTweetForm';
 
 interface Props {}
 
 const SideMenu: FC<Props> = () => {
   const styles = useStyles();
+  const [isVisiblePopup, setIsVisiblePopup] = useState(false);
 
   const listItems = [
     { text: 'Поиск', Icon: SearchOutlinedIcon },
@@ -31,6 +34,14 @@ const SideMenu: FC<Props> = () => {
     { text: 'Список', Icon: ListAltOutlinedIcon },
     { text: 'Профиль', Icon: PersonOutlineOutlinedIcon },
   ];
+
+  const handleClosePopup = () => {
+    setIsVisiblePopup(false);
+  };
+
+  const handleTweetBtnClick = () => {
+    setIsVisiblePopup(true);
+  };
 
   return (
     <List className={styles.navList} style={{ maxWidth: 230 }}>
@@ -59,13 +70,23 @@ const SideMenu: FC<Props> = () => {
         </ListItem>
       ))}
       <ListItem className={styles.navListTweetButton}>
-        <Button variant="contained" color="primary" fullWidth>
+        <Button
+          onClick={handleTweetBtnClick}
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
           <Hidden smDown>Твитнуть</Hidden>
           <Hidden mdUp>
             <CreateIcon />
           </Hidden>
         </Button>
       </ListItem>
+      <ModalBlock visible={isVisiblePopup} onClose={handleClosePopup}>
+        <div className={styles.addTweetFormWrapper}>
+          <AddTweetForm maxRows={15} />
+        </div>
+      </ModalBlock>
     </List>
   );
 };

@@ -8,7 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 interface Props {
   visible?: boolean;
-  title: string;
+  title?: string;
   onClose: () => void;
 }
 
