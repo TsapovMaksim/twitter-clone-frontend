@@ -1,6 +1,12 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(theme => ({
+  navList: {
+    maxWidth: 230,
+    position: 'sticky',
+    top: 0,
+    minWidth: 70,
+  },
   logo: {
     paddingLeft: 25,
     paddingRight: 3,
@@ -14,9 +20,11 @@ export const useStyles = makeStyles(theme => ({
     '& button': {
       padding: 10,
     },
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 0,
+    },
   },
   navListItem: {
-    // width: 230,
     height: 55,
     cursor: 'pointer',
     flexDirection: 'row-reverse',
@@ -40,6 +48,11 @@ export const useStyles = makeStyles(theme => ({
         fill: theme.palette.primary.main,
       },
     },
+    [theme.breakpoints.down('md')]: {
+      paddingRight: 0,
+      paddingLeft: 0,
+      justifyContent: 'center',
+    },
   },
   navListItemText: {
     fontWeight: 700,
@@ -50,6 +63,9 @@ export const useStyles = makeStyles(theme => ({
     '& svg': {
       fontSize: 28,
     },
+    [theme.breakpoints.down('md')]: {
+      minWidth: 'auto',
+    },
   },
   navListTweetButton: {
     marginTop: 30,
@@ -57,6 +73,12 @@ export const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(3),
     '& button': {
       padding: theme.spacing(3),
+    },
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 0,
+      '& button': {
+        padding: 0,
+      },
     },
   },
 }));
