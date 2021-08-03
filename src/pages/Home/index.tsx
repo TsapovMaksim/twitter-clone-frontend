@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -99,8 +99,8 @@ const Home: FC<Props> = ({}) => {
                 <b>Актуальные темы</b>
               </Paper>
               <List>
-                {rightSideListItems.map(text => (
-                  <>
+                {rightSideListItems.map((text, index) => (
+                  <React.Fragment key={index}>
                     <ListItem className={styles.rightSideBlockItem}>
                       <ListItemText
                         primary="Санкт-Петербург"
@@ -116,7 +116,7 @@ const Home: FC<Props> = ({}) => {
                       />
                     </ListItem>
                     <Divider component="li" />
-                  </>
+                  </React.Fragment>
                 ))}
               </List>
             </Paper>
