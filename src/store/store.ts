@@ -1,4 +1,4 @@
-import { tweetsReducer } from './slices/tweets';
+import { tweetsReducer } from './ducks/tweets/slice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';

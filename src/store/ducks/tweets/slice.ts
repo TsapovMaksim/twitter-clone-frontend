@@ -13,10 +13,17 @@ const tweets = createSlice({
   reducers: {
     setTweets(state, action: PayloadAction<ITweet[]>) {
       state.items = action.payload;
+      state.loadingState = TweetsLoadingState.LOADED;
     },
-    fetchTweets() {},
+    fetchTweets(state) {
+      state.items = [];
+      state.loadingState = TweetsLoadingState.LOADING;
+    },
+    setLoadingState(state, action: PayloadAction<TweetsLoadingState>) {
+      state.loadingState = action.payload;
+    },
   },
 });
 
 export const tweetsReducer = tweets.reducer;
-export const tweetsActions = tweets.actions;
+export const TweetsActions = tweets.actions;

@@ -12,25 +12,12 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 
 import { useStyles } from './styles';
+import { ITweet } from '../../store/ducks/tweets/types/state';
 
-export interface TweetProps {
-  fullName: string;
-  userName: string;
-  text: string;
-  avatar?: string;
-  likesCount: number;
-}
-
-const Tweet: FC<TweetProps> = ({
-  fullName,
-  userName,
-  text,
-  avatar,
-  likesCount,
-}) => {
+const Tweet: FC<ITweet> = ({ user, text }) => {
   const styles = useStyles();
   const buttonIcons = [
-    { Icon: ChatBubbleOutlineOutlinedIcon, label: likesCount },
+    { Icon: ChatBubbleOutlineOutlinedIcon, label: 1 },
     { Icon: RepeatOutlinedIcon },
     { Icon: FavoriteBorderOutlinedIcon },
     { Icon: ReplyOutlinedIcon },
@@ -40,13 +27,13 @@ const Tweet: FC<TweetProps> = ({
     <Paper variant="outlined" className={styles.tweet}>
       <Avatar
         className={styles.tweetAvatar}
-        alt={`Аватар пользователя ${fullName}`}
-        src={avatar}
+        alt={`Аватар пользователя ${user.fullname}`}
+        // src={user.avatar}
       />
       <Box className={styles.tweetContent}>
         <Typography>
-          <b>{fullName}</b>&nbsp;
-          <span className={styles.tweetUserName}>@{userName}</span>&nbsp;
+          <b>{user.fullname}</b>&nbsp;
+          <span className={styles.tweetUserName}>@{user.username}</span>&nbsp;
           <span className={styles.tweetUserName}>.</span>&nbsp;
           <span className={styles.tweetUserName}>1 ч</span>&nbsp;
         </Typography>
