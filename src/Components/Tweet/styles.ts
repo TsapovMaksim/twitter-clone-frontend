@@ -7,6 +7,7 @@ export const useStyles = makeStyles(theme => ({
     paddingLeft: 20,
     cursor: 'pointer',
     display: 'flex',
+    alignItems: 'flex-start',
     '&:hover': {
       backgroundColor: 'rgb(245,248,250)',
     },
@@ -30,5 +31,9 @@ export const useStyles = makeStyles(theme => ({
   },
   tweetContent: {
     width: '100%',
+  },
+  tweetWrapper: {
+    color: 'inherit',
+    textDecoration: 'none',
   },
 }));

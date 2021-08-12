@@ -16,6 +16,8 @@ export const useStyles = makeStyles(theme => ({
     borderBottom: 0,
   },
   tweetsHeader: {
+    display: 'flex',
+    alignItems: 'center',
     borderRadius: 0,
     borderLeft: 0,
     borderRight: 0,

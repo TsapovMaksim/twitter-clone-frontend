@@ -27,6 +27,9 @@ import { SearchTextField } from '../../Components/SearchTextField';
 import { TweetsActions } from '../../store/ducks/tweets/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { TweetsSelectors } from '../../store/ducks/tweets/selectors';
+import { Route } from 'react-router-dom';
+import BackButton from '../../Components/BackButton';
+import FullTweet from '../../Components/FullTweet';
 
 interface Props {}
 
@@ -55,25 +58,38 @@ const Home: FC<Props> = ({}) => {
         <Grid item sm={8} md={6}>
           <Paper className={styles.tweetsWrapper} variant="outlined">
             <Paper className={styles.tweetsHeader} variant="outlined">
-              <Typography variant="h6">Главная</Typography>
+              <Route path="/home/:any">
+                <BackButton />
+              </Route>
+
+              <Route exact path={['/home', '/home/search']}>
+                <Typography variant="h6">Главная</Typography>
+              </Route>
             </Paper>
-            <Paper>
-              <Box className={styles.addTweetForm}>
-                <AddTweetForm />
-              </Box>
-              <div className={styles.addFormBottomLine} />
-            </Paper>
-            {isTweetsLoading ? (
-              <Box marginTop="50px" textAlign="center">
-                <CircularProgress />
-              </Box>
-            ) : (
-              <>
-                {tweets.map(props => (
-                  <Tweet {...props} key={props._id} />
-                ))}
-              </>
-            )}
+            <Route exact path={['/home', '/home/search']}>
+              <Paper>
+                <Box className={styles.addTweetForm}>
+                  <AddTweetForm />
+                </Box>
+                <div className={styles.addFormBottomLine} />
+              </Paper>
+            </Route>
+
+            <Route exact path="/home">
+              {isTweetsLoading ? (
+                <Box marginTop="50px" textAlign="center">
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <>
+                  {tweets.map(props => (
+                    <Tweet {...props} key={props._id} />
+                  ))}
+                </>
+              )}
+            </Route>
+
+            <Route exact component={FullTweet} path="/home/tweet/:id" />
           </Paper>
         </Grid>
         <Grid item sm={3} md={3}>
