@@ -19,6 +19,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import { useStyles } from './styles';
 import ModalBlock from '../ModalBlock';
 import AddTweetForm from '../AddTweetForm';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -46,11 +47,13 @@ const SideMenu: FC<Props> = () => {
   return (
     <List className={styles.navList} style={{ maxWidth: 230 }}>
       <ListItem disableGutters className={styles.logo}>
-        <ListItemIcon>
-          <IconButton>
-            <TwitterIcon color="primary" />
-          </IconButton>
-        </ListItemIcon>
+        <Link to="/home">
+          <ListItemIcon>
+            <IconButton>
+              <TwitterIcon color="primary" />
+            </IconButton>
+          </ListItemIcon>
+        </Link>
       </ListItem>
       {listItems.map(({ text, Icon }, index) => (
         <ListItem key={index} disableGutters className={styles.navListItem}>

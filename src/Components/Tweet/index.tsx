@@ -12,59 +12,49 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 
 import { useStyles } from './styles';
+import { ITweet } from '../../store/ducks/tweets/types/state';
+import { Link } from 'react-router-dom';
 
-export interface TweetProps {
-  fullName: string;
-  userName: string;
-  text: string;
-  avatar?: string;
-  likesCount: number;
-}
-
-const Tweet: FC<TweetProps> = ({
-  fullName,
-  userName,
-  text,
-  avatar,
-  likesCount,
-}) => {
+const Tweet: FC<ITweet> = ({ user, text, _id }) => {
   const styles = useStyles();
   const buttonIcons = [
-    { Icon: ChatBubbleOutlineOutlinedIcon, label: likesCount },
+    { Icon: ChatBubbleOutlineOutlinedIcon, label: 1 },
     { Icon: RepeatOutlinedIcon },
     { Icon: FavoriteBorderOutlinedIcon },
     { Icon: ReplyOutlinedIcon },
   ];
 
   return (
-    <Paper variant="outlined" className={styles.tweet}>
-      <Avatar
-        className={styles.tweetAvatar}
-        alt={`Аватар пользователя ${fullName}`}
-        src={avatar}
-      />
-      <Box className={styles.tweetContent}>
-        <Typography>
-          <b>{fullName}</b>&nbsp;
-          <span className={styles.tweetUserName}>@{userName}</span>&nbsp;
-          <span className={styles.tweetUserName}>.</span>&nbsp;
-          <span className={styles.tweetUserName}>1 ч</span>&nbsp;
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {text}
-        </Typography>
-        <Box className={styles.tweetFooter}>
-          {buttonIcons.map(({ Icon, label }, index) => (
-            <Box key={index}>
-              <IconButton>
-                <Icon color="primary" />
-              </IconButton>
-              {label && <span>{label}</span>}
-            </Box>
-          ))}
+    <Link className={styles.tweetWrapper} to={`/home/tweet/${_id}`}>
+      <Paper variant="outlined" className={styles.tweet}>
+        <Avatar
+          className={styles.tweetAvatar}
+          alt={`Аватар пользователя ${user.fullname}`}
+          // src={user.avatar}
+        />
+        <Box className={styles.tweetContent}>
+          <Typography>
+            <b>{user.fullname}</b>&nbsp;
+            <span className={styles.tweetUserName}>@{user.username}</span>&nbsp;
+            <span className={styles.tweetUserName}>.</span>&nbsp;
+            <span className={styles.tweetUserName}>1 ч</span>&nbsp;
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {text}
+          </Typography>
+          <Box className={styles.tweetFooter}>
+            {buttonIcons.map(({ Icon, label }, index) => (
+              <Box key={index}>
+                <IconButton>
+                  <Icon color="primary" />
+                </IconButton>
+                {label && <span>{label}</span>}
+              </Box>
+            ))}
+          </Box>
         </Box>
-      </Box>
-    </Paper>
+      </Paper>
+    </Link>
   );
 };
 

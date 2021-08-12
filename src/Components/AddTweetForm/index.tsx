@@ -41,7 +41,7 @@ const AddTweetForm: FC<Props> = ({ maxRows }) => {
         <Avatar
           className={styles.tweetAvatar}
           alt={`Аватарка пользователя UserAvatar`}
-          src="https://source.unsplash.com/random"
+          src=""
         />
         <TextareaAutosize
           onChange={handleChangeTextare}

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -19,38 +19,35 @@ import SearchIcon from '@material-ui/icons/SearchOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 
 import { useStyles } from './styles';
-import Tweet, { TweetProps } from '../../Components/Tweet';
+import Tweet from '../../Components/Tweet';
 import SideMenu from '../../Components/SideMenu';
 import AddTweetForm from '../../Components/AddTweetForm';
 import { SearchTextField } from '../../Components/SearchTextField';
+
+import { TweetsActions } from '../../store/ducks/tweets/slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { TweetsSelectors } from '../../store/ducks/tweets/selectors';
+import { Route } from 'react-router-dom';
+import BackButton from '../../Components/BackButton';
+import FullTweet from '../../Components/FullTweet';
 
 interface Props {}
 
 const Home: FC<Props> = ({}) => {
   const styles = useStyles();
-  const [isLoading, setIsLoading] = useState(false);
+  const tweets = useSelector(TweetsSelectors.selectTweetsItems);
+  const isTweetsLoading = useSelector(TweetsSelectors.selectIsTweetsLoading);
+  const dispatch = useDispatch();
 
-  const tweets: TweetProps[] = [
-    {
-      fullName: 'asd',
-      userName: '123',
-      likesCount: 1,
-      text: 'Tweet text',
-      avatar: 'https://source.unsplash.com/random',
-    },
-    {
-      fullName: 'asd',
-      userName: '123',
-      likesCount: 1,
-      text: 'Tweet text',
-      avatar: 'https://source.unsplash.com/random',
-    },
-  ];
   const rightSideListItems = [
     'Твитов: 3 331',
     'Твитов: 3 1231',
     'Твитов: 6 451',
   ];
+
+  useEffect(() => {
+    dispatch(TweetsActions.fetchTweets());
+  }, []);
 
   return (
     <Container className={styles.wrapper} component="section" maxWidth="lg">
@@ -61,23 +58,38 @@ const Home: FC<Props> = ({}) => {
         <Grid item sm={8} md={6}>
           <Paper className={styles.tweetsWrapper} variant="outlined">
             <Paper className={styles.tweetsHeader} variant="outlined">
-              <Typography variant="h6">Главная</Typography>
+              <Route path="/home/:any">
+                <BackButton />
+              </Route>
+
+              <Route exact path={['/home', '/home/search']}>
+                <Typography variant="h6">Главная</Typography>
+              </Route>
             </Paper>
-            <Paper>
-              <Box className={styles.addTweetForm}>
-                <AddTweetForm />
-              </Box>
-              <div className={styles.addFormBottomLine} />
-            </Paper>
-            {isLoading ? (
-              <CircularProgress />
-            ) : (
-              <>
-                {tweets.map((props, index) => (
-                  <Tweet {...props} key={index} />
-                ))}
-              </>
-            )}
+            <Route exact path={['/home', '/home/search']}>
+              <Paper>
+                <Box className={styles.addTweetForm}>
+                  <AddTweetForm />
+                </Box>
+                <div className={styles.addFormBottomLine} />
+              </Paper>
+            </Route>
+
+            <Route exact path="/home">
+              {isTweetsLoading ? (
+                <Box marginTop="50px" textAlign="center">
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <>
+                  {tweets.map(props => (
+                    <Tweet {...props} key={props._id} />
+                  ))}
+                </>
+              )}
+            </Route>
+
+            <Route exact component={FullTweet} path="/home/tweet/:id" />
           </Paper>
         </Grid>
         <Grid item sm={3} md={3}>
@@ -127,10 +139,7 @@ const Home: FC<Props> = ({}) => {
               <List>
                 <ListItem className={styles.rightSideBlockItem}>
                   <ListItemAvatar>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://pbs.twimg.com/profile_images/1267938486566428673/US6KRPbA_normal.jpg"
-                    />
+                    <Avatar alt="Remy Sharp" src="" />
                   </ListItemAvatar>
                   <ListItemText
                     primary="Dock Of Shame"
