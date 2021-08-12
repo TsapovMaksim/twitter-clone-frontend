@@ -1,7 +1,7 @@
 import { axios } from '../../core/axios';
 import { ITweet } from '../../store/ducks/tweets/types/state';
 
-interface Respone<T> {
+interface Response<T> {
   status: string;
   data: T;
 }
@@ -9,7 +9,14 @@ interface Respone<T> {
 export const TweetsApi = {
   async fetchTweets(): Promise<ITweet[]> {
     const data = await axios
-      .get<Respone<ITweet[]>>('/tweets')
+      .get<Response<ITweet[]>>('/tweets')
+      .then(({ data }) => data);
+
+    return data.data;
+  },
+  async fetchTweetData(id: string): Promise<ITweet> {
+    const data = await axios
+      .get<Response<ITweet>>(`/tweets/${id}`)
       .then(({ data }) => data);
 
     return data.data;
