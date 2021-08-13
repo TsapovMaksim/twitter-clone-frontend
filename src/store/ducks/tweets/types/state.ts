@@ -5,6 +5,13 @@ export enum TweetsLoadingState {
   LOADING = 'LOADING',
 }
 
+export enum AddTweetFormLoadingState {
+  LOADED = 'LOADED',
+  ERROR = 'ERROR',
+  NEVER = 'NEVER',
+  LOADING = 'LOADING',
+}
+
 export interface ITweet {
   _id: string;
   text: string;
@@ -19,5 +26,5 @@ export interface ITweet {
 export interface ITweetsState {
   items: ITweet[];
   loadingState: TweetsLoadingState;
-  count: number;
+  addFromState: AddTweetFormLoadingState;
 }
