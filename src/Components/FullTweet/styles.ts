@@ -3,14 +3,13 @@ import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles(theme => ({
   tweet: {
-    paddingTop: 15,
-    paddingLeft: 20,
-    cursor: 'pointer',
+    padding: 22,
+    border: 'none',
+  },
+  tweetHeader: {
     display: 'flex',
-    alignItems: 'flex-start',
-    '&:hover': {
-      backgroundColor: 'rgb(245,248,250)',
-    },
+    width: '100%',
+    marginBottom: 15,
   },
   tweetAvatar: {
     width: theme.spacing(6.5),
@@ -25,18 +24,21 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     maxWidth: 450,
     width: '100%',
+    margin: '0 auto',
     '& svg': {
       fontSize: 22,
     },
   },
   tweetContent: {
     width: '100%',
-    '& p': {
-      wordBreak: 'break-word',
-    },
   },
   tweetWrapper: {
     color: 'inherit',
     textDecoration: 'none',
+  },
+  tweetText: {
+    fontSize: 24,
+    lineHeight: 1.3,
+    wordBreak: 'break-word',
   },
 }));
