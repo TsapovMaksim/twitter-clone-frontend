@@ -21,4 +21,12 @@ export const TweetsApi = {
 
     return data.data;
   },
+
+  async addTweet(text: string): Promise<ITweet> {
+    const tweet = await axios
+      .post<Response<ITweet>>('/tweets', { text })
+      .then(({ data }) => data);
+
+    return tweet.data;
+  },
 };

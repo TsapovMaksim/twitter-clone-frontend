@@ -1,10 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ITweet, ITweetsState, TweetsLoadingState } from './types/state';
+import {
+  AddTweetFormLoadingState,
+  ITweet,
+  ITweetsState,
+  TweetsLoadingState,
+} from './types/state';
 
 const initialState: ITweetsState = {
   items: [],
   loadingState: TweetsLoadingState.NEVER,
-  count: 0,
+  addFromState: AddTweetFormLoadingState.NEVER,
 };
 
 const tweets = createSlice({
@@ -21,6 +26,19 @@ const tweets = createSlice({
     },
     setLoadingState(state, action: PayloadAction<TweetsLoadingState>) {
       state.loadingState = action.payload;
+    },
+    setAddFormLoadingState(
+      state,
+      action: PayloadAction<AddTweetFormLoadingState>
+    ) {
+      state.addFromState = action.payload;
+    },
+    addTweet(state, action: PayloadAction<ITweet>) {
+      state.items = [action.payload, ...state.items];
+      state.addFromState = AddTweetFormLoadingState.LOADED;
+    },
+    fetchAddTweet(state, action: PayloadAction<string>) {
+      state.addFromState = AddTweetFormLoadingState.LOADING;
     },
   },
 });
