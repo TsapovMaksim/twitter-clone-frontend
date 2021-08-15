@@ -15,6 +15,7 @@ export enum AddTweetFormLoadingState {
 export interface ITweet {
   _id: string;
   text: string;
+  createdAt: string;
   user: {
     fullname: string;
     username: string;

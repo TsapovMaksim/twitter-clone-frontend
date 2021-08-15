@@ -16,6 +16,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 
 import { useStyles } from './styles';
+import { formatDate } from '../../utils/formatDate';
 
 interface IParams {
   id: 'string';
@@ -55,7 +56,7 @@ const FullTweet: FC = () => {
   }
 
   if (tweetData) {
-    const { user, text } = tweetData;
+    const { user, text, createdAt } = tweetData;
     return (
       <Paper variant="outlined" className={styles.tweet}>
         <Box className={styles.tweetHeader}>
@@ -69,7 +70,10 @@ const FullTweet: FC = () => {
             <br />
             <span className={styles.tweetUserName}>@{user.username}</span>&nbsp;
             <span className={styles.tweetUserName}>.</span>&nbsp;
-            <span className={styles.tweetUserName}>1 ч</span>&nbsp;
+            <span className={styles.tweetUserName}>
+              {formatDate(new Date(createdAt))}
+            </span>
+            &nbsp;
           </Typography>
         </Box>
         <Box className={styles.tweetContent}>

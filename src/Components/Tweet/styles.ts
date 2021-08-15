@@ -39,4 +39,13 @@ export const useStyles = makeStyles(theme => ({
     color: 'inherit',
     textDecoration: 'none',
   },
+  tweetUserInfo: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  tweetMenuButton: {
+    marginLeft: 'auto',
+    marginRight: 10,
+  },
 }));
