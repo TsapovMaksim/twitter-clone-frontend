@@ -1,9 +1,6 @@
+import { LoadingState } from '@store/types';
 import { PayloadAction } from '@reduxjs/toolkit';
-import {
-  ITweet,
-  TweetsLoadingState,
-  AddTweetFormLoadingState,
-} from './types/state';
+import { ITweet } from './types/state';
 import { TweetsActions } from './slice';
 import { TweetsApi } from '@services/api/tweetsApi';
 import { call, put, takeLatest } from 'redux-saga/effects';
@@ -13,7 +10,7 @@ function* fetchTweetsRequest() {
     const data: ITweet[] = yield call(TweetsApi.fetchTweets);
     yield put(TweetsActions.setTweets(data));
   } catch (error) {
-    yield put(TweetsActions.setLoadingState(TweetsLoadingState.ERROR));
+    yield put(TweetsActions.setLoadingState(LoadingState.ERROR));
   }
 }
 
@@ -22,9 +19,7 @@ function* fetchAddTweetRequest(action: PayloadAction<string>) {
     const tweet: ITweet = yield call(TweetsApi.addTweet, action.payload);
     yield put(TweetsActions.addTweet(tweet));
   } catch (error) {
-    yield put(
-      TweetsActions.setAddFormLoadingState(AddTweetFormLoadingState.ERROR)
-    );
+    yield put(TweetsActions.setAddFormLoadingState(LoadingState.ERROR));
   }
 }
 

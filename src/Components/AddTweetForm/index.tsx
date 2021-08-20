@@ -15,7 +15,7 @@ import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { TweetsActions } from '@store/ducks/tweets/slice';
 import { TweetsSelectors } from '@store/ducks/tweets/selectors';
-import { AddTweetFormLoadingState } from '@store/ducks/tweets/types/state';
+import { LoadingState } from '@store/types';
 
 interface Props {
   maxRows?: number;
@@ -32,10 +32,10 @@ const AddTweetForm: FC<Props> = ({ maxRows }) => {
   const textLimitPercent = Math.round((text.length / 280) * 100);
   const textCount = MAX_LENGTH - text.length;
   const isAddButtonDisabled =
-    formLoadingState === AddTweetFormLoadingState.LOADING ||
+    formLoadingState === LoadingState.LOADING ||
     !text ||
     text.length >= MAX_LENGTH;
-  const isAlertVisible = formLoadingState === AddTweetFormLoadingState.ERROR;
+  const isAlertVisible = formLoadingState === LoadingState.ERROR;
 
   const handleChangeTextare = (
     e: React.FormEvent<HTMLTextAreaElement>
@@ -110,7 +110,7 @@ const AddTweetForm: FC<Props> = ({ maxRows }) => {
             color="primary"
             variant="contained"
           >
-            {formLoadingState === AddTweetFormLoadingState.LOADING ? (
+            {formLoadingState === LoadingState.LOADING ? (
               <CircularProgress size={16} />
             ) : (
               'Твитнуть'

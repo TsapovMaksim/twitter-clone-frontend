@@ -1,10 +1,11 @@
+import { LoadingState } from '@store/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITweet } from '../tweets/types/state';
-import { CurrentTweetLoadingState, ICurrentTweetState } from './types/state';
+import { ICurrentTweetState } from './types/state';
 
 const initialState: ICurrentTweetState = {
   data: null,
-  loadingState: CurrentTweetLoadingState.NEVER,
+  loadingState: LoadingState.NEVER,
 };
 
 const currentTweet = createSlice({
@@ -13,12 +14,12 @@ const currentTweet = createSlice({
   reducers: {
     setData(state, action: PayloadAction<ITweet | null>) {
       state.data = action.payload;
-      state.loadingState = CurrentTweetLoadingState.LOADED;
+      state.loadingState = LoadingState.LOADED;
     },
     fetchData(state, payload: PayloadAction<string>) {
-      state.loadingState = CurrentTweetLoadingState.LOADING;
+      state.loadingState = LoadingState.LOADING;
     },
-    setLoadingState(state, action: PayloadAction<CurrentTweetLoadingState>) {
+    setLoadingState(state, action: PayloadAction<LoadingState>) {
       state.loadingState = action.payload;
     },
   },
