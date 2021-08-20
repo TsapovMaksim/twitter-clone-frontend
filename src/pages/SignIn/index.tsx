@@ -7,23 +7,20 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import FormGroup from '@material-ui/core/FormGroup';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import { useStyles } from './styles';
 
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import ModalBlock from '../../Components/ModalBlock';
-import { useToggle } from '../../hooks/useToggle';
+
+import { useStyles } from './styles';
+import LoginModal from './components/LoginModal';
+import RegisterModal from './components/RegisterModal';
 
 interface Props {}
 
 const SignIn: FC<Props> = ({}) => {
   const styles = useStyles();
-  const [isOpen, setIsOpen] = useToggle(true);
   const [visibleModal, setVisibleModal] = useState<'signIn' | 'signUp'>();
 
   const listItems = [
@@ -42,6 +39,16 @@ const SignIn: FC<Props> = ({}) => {
 
   const handleClickOpenSignUp = (): void => {
     setVisibleModal('signUp');
+  };
+
+  const loginModalProps = {
+    open: visibleModal === 'signIn',
+    handleCloseModal,
+  };
+
+  const registerModalProps = {
+    open: visibleModal === 'signUp',
+    handleCloseModal,
   };
 
   return (
@@ -87,105 +94,8 @@ const SignIn: FC<Props> = ({}) => {
             Войти
           </Button>
         </Box>
-        <ModalBlock
-          visible={visibleModal === 'signIn'}
-          onClose={handleCloseModal}
-          title="Войти в аккаунт"
-        >
-          <FormControl
-            className={styles.loginFormControl}
-            component="fieldset"
-            fullWidth
-          >
-            <FormGroup aria-label="position" row>
-              <TextField
-                className={styles.loginSideField}
-                autoFocus
-                id="email"
-                label="E-Mail"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="filled"
-                type="email"
-                fullWidth
-              />
-              <TextField
-                className={styles.loginSideField}
-                autoFocus
-                id="password"
-                label="Пароль"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="filled"
-                type="password"
-                fullWidth
-              />
-              <Button
-                onClick={handleCloseModal}
-                variant="contained"
-                color="primary"
-                fullWidth
-              >
-                Войти
-              </Button>
-            </FormGroup>
-          </FormControl>
-        </ModalBlock>
-        <ModalBlock
-          visible={visibleModal === 'signUp'}
-          onClose={handleCloseModal}
-          title="Создайте учетную запись"
-        >
-          <FormControl
-            className={styles.loginFormControl}
-            component="fieldset"
-            fullWidth
-          >
-            <FormGroup aria-label="position" row>
-              <TextField
-                className={styles.registerField}
-                autoFocus
-                id="name"
-                label="Имя"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="filled"
-                type="name"
-                fullWidth
-              />
-              <TextField
-                className={styles.registerField}
-                autoFocus
-                id="email"
-                label="E-Mail"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="filled"
-                type="email"
-                fullWidth
-              />
-              <TextField
-                className={styles.registerField}
-                autoFocus
-                id="password"
-                label="Пароль"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="filled"
-                type="password"
-                fullWidth
-              />
-              <Button variant="contained" color="primary" fullWidth>
-                Далее
-              </Button>
-            </FormGroup>
-          </FormControl>
-        </ModalBlock>
+        <LoginModal {...loginModalProps} />
+        <RegisterModal {...registerModalProps} />
       </Grid>
     </Grid>
   );
