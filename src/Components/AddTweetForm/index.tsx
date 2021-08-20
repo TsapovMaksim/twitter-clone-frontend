@@ -13,9 +13,9 @@ import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import classNames from 'classnames';
 import { useStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { TweetsActions } from '../../store/ducks/tweets/slice';
-import { TweetsSelectors } from '../../store/ducks/tweets/selectors';
-import { AddTweetFormLoadingState } from '../../store/ducks/tweets/types/state';
+import { TweetsActions } from '@store/ducks/tweets/slice';
+import { TweetsSelectors } from '@store/ducks/tweets/selectors';
+import { AddTweetFormLoadingState } from '@store/ducks/tweets/types/state';
 
 interface Props {
   maxRows?: number;

@@ -15,9 +15,9 @@ import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import { useStyles } from './styles';
-import { ITweet } from '../../store/ducks/tweets/types/state';
-import { Link, useHistory } from 'react-router-dom';
-import { formatDate } from '../../utils/formatDate';
+import { ITweet } from '@store/ducks/tweets/types/state';
+import { useHistory } from 'react-router-dom';
+import { formatDate } from '@utils/formatDate';
 
 const Tweet: FC<ITweet> = ({ user, text, _id, createdAt }) => {
   const styles = useStyles();

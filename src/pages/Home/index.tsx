@@ -19,17 +19,17 @@ import SearchIcon from '@material-ui/icons/SearchOutlined';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 
 import { useStyles } from './styles';
-import Tweet from '../../Components/Tweet';
-import SideMenu from '../../Components/SideMenu';
-import AddTweetForm from '../../Components/AddTweetForm';
-import { SearchTextField } from '../../Components/SearchTextField';
+import Tweet from '@components/Tweet';
+import SideMenu from '@components/SideMenu';
+import AddTweetForm from '@components/AddTweetForm';
+import { SearchTextField } from '@components/SearchTextField';
+import BackButton from '@components/BackButton';
+import FullTweet from '@components/FullTweet';
 
-import { TweetsActions } from '../../store/ducks/tweets/slice';
+import { TweetsActions } from '@store/ducks/tweets/slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { TweetsSelectors } from '../../store/ducks/tweets/selectors';
+import { TweetsSelectors } from '@store/ducks/tweets/selectors';
 import { Route } from 'react-router-dom';
-import BackButton from '../../Components/BackButton';
-import FullTweet from '../../Components/FullTweet';
 
 interface Props {}
 

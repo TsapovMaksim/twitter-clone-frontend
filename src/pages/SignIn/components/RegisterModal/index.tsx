@@ -5,8 +5,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-import ModalBlock from '../../../../Components/ModalBlock';
-import { useStyles } from '../../styles';
+import ModalBlock from '@components/ModalBlock';
+import { useStyles } from '@pages/SignIn/styles';
 
 interface RegisterModalProps {
   open: boolean;

@@ -16,10 +16,12 @@ import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutline
 import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import CreateIcon from '@material-ui/icons/Create';
+
 import { useStyles } from './styles';
-import ModalBlock from '../ModalBlock';
-import AddTweetForm from '../AddTweetForm';
+
 import { Link } from 'react-router-dom';
+import ModalBlock from '@components/ModalBlock';
+import AddTweetForm from '@components/AddTweetForm';
 
 interface Props {}
 

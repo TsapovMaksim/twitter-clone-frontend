@@ -1,4 +1,4 @@
-import { LoadingState } from '../../../types';
+import { LoadingState } from '@store/types';
 
 export interface IUser {
   _id: string;

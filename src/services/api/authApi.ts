@@ -1,6 +1,6 @@
-import { IUser } from './../../store/ducks/user/types/state';
-import { axios } from '../../core/axios';
-import { ILoginFormProps } from '../../pages/SignIn/components/LoginModal';
+import { IUser } from '@store/ducks/user/types/state';
+import { axios } from '@core/axios';
+import { ILoginFormProps } from '@pages/SignIn/components/LoginModal';
 
 interface Response<T> {
   status: string;

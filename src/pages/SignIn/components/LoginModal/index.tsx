@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -7,14 +7,15 @@ import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-import ModalBlock from '../../../../Components/ModalBlock';
-import { useStyles } from '../../styles';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserActions } from '../../../../store/ducks/user/slice';
-import { useEffect } from 'react';
-import { UserSelectors } from '../../../../store/ducks/user/selectors';
-import { LoadingState } from '../../../../store/types';
+
+import { useStyles } from '@pages/SignIn/styles';
+import ModalBlock from '@components/ModalBlock';
+
+import { UserActions } from '@store/ducks/user/slice';
+import { UserSelectors } from '@store/ducks/user/selectors';
+import { LoadingState } from '@store/types';
 
 interface LoginModalProps {
   open: boolean;

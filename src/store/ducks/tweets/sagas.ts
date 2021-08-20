@@ -5,7 +5,7 @@ import {
   AddTweetFormLoadingState,
 } from './types/state';
 import { TweetsActions } from './slice';
-import { TweetsApi } from './../../../services/api/tweetsApi';
+import { TweetsApi } from '@services/api/tweetsApi';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 function* fetchTweetsRequest() {

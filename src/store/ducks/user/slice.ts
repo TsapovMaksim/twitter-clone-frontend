@@ -1,7 +1,7 @@
 import { IUser, IUserState } from './types/state';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadingState } from '../../types';
-import { ILoginFormProps } from '../../../pages/SignIn/components/LoginModal';
+import { LoadingState } from '@store/types';
+import { ILoginFormProps } from '@pages/SignIn/components/LoginModal';
 
 const initialState: IUserState = {
   data: undefined,

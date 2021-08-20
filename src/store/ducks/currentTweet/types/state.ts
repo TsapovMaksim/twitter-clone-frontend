@@ -1,4 +1,4 @@
-import { ITweet } from '../../tweets/types/state';
+import { ITweet } from '@store/ducks/tweets/types/state';
 
 export enum CurrentTweetLoadingState {
   LOADED = 'LOADED',

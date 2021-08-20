@@ -1,5 +1,5 @@
-import { axios } from '../../core/axios';
-import { ITweet } from '../../store/ducks/tweets/types/state';
+import { axios } from '@core/axios';
+import { ITweet } from '@store/ducks/tweets/types/state';
 
 interface Response<T> {
   status: string;

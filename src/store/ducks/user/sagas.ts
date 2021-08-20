@@ -1,10 +1,10 @@
 import { IUser } from './types/state';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { AuthApi } from './../../../services/api/authApi';
+import { AuthApi } from '@services/api/authApi';
 import { UserActions } from './slice';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { ILoginFormProps } from '../../../pages/SignIn/components/LoginModal';
-import { LoadingState } from '../../types';
+import { ILoginFormProps } from '@pages/SignIn/components/LoginModal';
+import { LoadingState } from '@store/types';
 
 function* fetchUserDataRequest({ payload }: PayloadAction<ILoginFormProps>) {
   try {

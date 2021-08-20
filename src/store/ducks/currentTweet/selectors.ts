@@ -1,4 +1,4 @@
-import { RootState } from './../../store';
+import { RootState } from '@store/store';
 import { CurrentTweetLoadingState } from './types/state';
 
 export const CurrentTweetSelectors = {
