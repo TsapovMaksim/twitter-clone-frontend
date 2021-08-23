@@ -1,8 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { CurrentTweetSelectors } from '../../store/ducks/currentTweet/selectors';
-import { CurrentTweetActions } from '../../store/ducks/currentTweet/slice';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
@@ -16,7 +14,9 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 
 import { useStyles } from './styles';
-import { formatDate } from '../../utils/formatDate';
+import { CurrentTweetActions } from '@store/ducks/currentTweet/slice';
+import { CurrentTweetSelectors } from '@store/ducks/currentTweet/selectors';
+import { formatDate } from '@utils/formatDate';
 
 interface IParams {
   id: 'string';

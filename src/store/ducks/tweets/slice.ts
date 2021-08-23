@@ -1,15 +1,11 @@
+import { LoadingState } from '@store/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  AddTweetFormLoadingState,
-  ITweet,
-  ITweetsState,
-  TweetsLoadingState,
-} from './types/state';
+import { ITweet, ITweetsState } from './types/state';
 
 const initialState: ITweetsState = {
   items: [],
-  loadingState: TweetsLoadingState.NEVER,
-  addFromState: AddTweetFormLoadingState.NEVER,
+  loadingState: LoadingState.NEVER,
+  addFromState: LoadingState.NEVER,
 };
 
 const tweets = createSlice({
@@ -18,27 +14,24 @@ const tweets = createSlice({
   reducers: {
     setTweets(state, action: PayloadAction<ITweet[]>) {
       state.items = action.payload;
-      state.loadingState = TweetsLoadingState.LOADED;
+      state.loadingState = LoadingState.LOADED;
     },
     fetchTweets(state) {
       state.items = [];
-      state.loadingState = TweetsLoadingState.LOADING;
+      state.loadingState = LoadingState.LOADING;
     },
-    setLoadingState(state, action: PayloadAction<TweetsLoadingState>) {
+    setLoadingState(state, action: PayloadAction<LoadingState>) {
       state.loadingState = action.payload;
     },
-    setAddFormLoadingState(
-      state,
-      action: PayloadAction<AddTweetFormLoadingState>
-    ) {
+    setAddFormLoadingState(state, action: PayloadAction<LoadingState>) {
       state.addFromState = action.payload;
     },
     addTweet(state, action: PayloadAction<ITweet>) {
       state.items = [action.payload, ...state.items];
-      state.addFromState = AddTweetFormLoadingState.LOADED;
+      state.addFromState = LoadingState.LOADED;
     },
     fetchAddTweet(state, action: PayloadAction<string>) {
-      state.addFromState = AddTweetFormLoadingState.LOADING;
+      state.addFromState = LoadingState.LOADING;
     },
   },
 });

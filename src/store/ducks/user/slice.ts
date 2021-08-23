@@ -1,7 +1,8 @@
 import { IUser, IUserState } from './types/state';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadingState } from '../../types';
-import { ILoginFormProps } from '../../../pages/SignIn/components/LoginModal';
+import { LoadingState } from '@store/types';
+import { ILoginFormProps } from '@pages/SignIn/components/LoginModal';
+import { IRegisterFormProps } from '@pages/SignIn/components/RegisterModal';
 
 const initialState: IUserState = {
   data: undefined,
@@ -21,6 +22,9 @@ const userSlice = createSlice({
     },
     setLoadingState(state, action: PayloadAction<LoadingState>) {
       state.loadingState = action.payload;
+    },
+    fetchSignUp(state, action: PayloadAction<IRegisterFormProps>) {
+      state.loadingState = LoadingState.LOADING;
     },
   },
 });

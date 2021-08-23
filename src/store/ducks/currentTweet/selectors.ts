@@ -1,8 +1,8 @@
-import { RootState } from './../../store';
-import { CurrentTweetLoadingState } from './types/state';
+import { LoadingState } from '@store/types';
+import { RootState } from '@store/store';
 
 export const CurrentTweetSelectors = {
   selectTweetData: (state: RootState) => state.currentTweet.data,
   selectIsCurrentTweetLoading: (state: RootState) =>
-    state.currentTweet.loadingState === CurrentTweetLoadingState.LOADING,
+    state.currentTweet.loadingState === LoadingState.LOADING,
 };

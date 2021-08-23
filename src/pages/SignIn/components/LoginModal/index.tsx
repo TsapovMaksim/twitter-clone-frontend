@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -7,14 +7,15 @@ import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-import ModalBlock from '../../../../Components/ModalBlock';
-import { useStyles } from '../../styles';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserActions } from '../../../../store/ducks/user/slice';
-import { useEffect } from 'react';
-import { UserSelectors } from '../../../../store/ducks/user/selectors';
-import { LoadingState } from '../../../../store/types';
+
+import { useStyles } from '@pages/SignIn/styles';
+import ModalBlock from '@components/ModalBlock';
+
+import { UserActions } from '@store/ducks/user/slice';
+import { UserSelectors } from '@store/ducks/user/selectors';
+import { LoadingState } from '@store/types';
 
 interface LoginModalProps {
   open: boolean;
@@ -33,6 +34,7 @@ const loginFormSchema = yup.object().shape({
     .min(6, 'Минимальная длина пароля 6 символов')
     .required(),
 });
+
 const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -44,17 +46,17 @@ const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
   } = useForm<ILoginFormProps>({
     resolver: yupResolver(loginFormSchema),
   });
+  const isSubmitButtonDisabled = loadingStatus === LoadingState.LOADING;
 
   const onSubmit = handleSubmit(async data => {
-    try {
-      // const userData = await AuthApi.signIn(data);
-      dispatch(UserActions.fetchUserData(data));
-      handleCloseModal();
-    } catch (error) {}
+    dispatch(UserActions.fetchUserData(data));
   });
 
   useEffect(() => {
     if (loadingStatus === LoadingState.SUCCESS) {
+      handleCloseModal();
+    } else if (loadingStatus === LoadingState.ERROR) {
+      console.log('Error login');
     }
   }, [loadingStatus]);
 
@@ -120,9 +122,10 @@ const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
               variant="contained"
               color="primary"
               type="submit"
+              disabled={isSubmitButtonDisabled}
               fullWidth
             >
-              Войти
+              Регистрация
             </Button>
           </FormGroup>
         </FormControl>

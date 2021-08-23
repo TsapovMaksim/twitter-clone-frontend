@@ -1,16 +1,4 @@
-export enum TweetsLoadingState {
-  LOADED = 'LOADED',
-  ERROR = 'ERROR',
-  NEVER = 'NEVER',
-  LOADING = 'LOADING',
-}
-
-export enum AddTweetFormLoadingState {
-  LOADED = 'LOADED',
-  ERROR = 'ERROR',
-  NEVER = 'NEVER',
-  LOADING = 'LOADING',
-}
+import { LoadingState } from '@store/types';
 
 export interface ITweet {
   _id: string;
@@ -26,6 +14,6 @@ export interface ITweet {
 
 export interface ITweetsState {
   items: ITweet[];
-  loadingState: TweetsLoadingState;
-  addFromState: AddTweetFormLoadingState;
+  loadingState: LoadingState;
+  addFromState: LoadingState;
 }

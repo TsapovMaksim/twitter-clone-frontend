@@ -1,18 +1,16 @@
+import { LoadingState } from '@store/types';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { CurrentTweetActions } from './slice';
-import { takeLatest, put, call, take } from 'redux-saga/effects';
-import { CurrentTweetLoadingState } from './types/state';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import { ITweet } from '../tweets/types/state';
-import { TweetsApi } from '../../../services/api/tweetsApi';
+import { TweetsApi } from '@services/api/tweetsApi';
 
 function* fetchCurrentTweetRequest(action: PayloadAction<string>) {
   try {
     const data: ITweet = yield call(TweetsApi.fetchTweetData, action.payload);
     yield put(CurrentTweetActions.setData(data));
   } catch (error) {
-    yield put(
-      CurrentTweetActions.setLoadingState(CurrentTweetLoadingState.ERROR)
-    );
+    yield put(CurrentTweetActions.setLoadingState(LoadingState.ERROR));
   }
 }
 

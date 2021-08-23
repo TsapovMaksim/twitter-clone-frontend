@@ -1,13 +1,7 @@
-import { ITweet } from '../../tweets/types/state';
-
-export enum CurrentTweetLoadingState {
-  LOADED = 'LOADED',
-  ERROR = 'ERROR',
-  NEVER = 'NEVER',
-  LOADING = 'LOADING',
-}
+import { LoadingState } from '@store/types';
+import { ITweet } from '@store/ducks/tweets/types/state';
 
 export interface ICurrentTweetState {
   data: ITweet | null;
-  loadingState: CurrentTweetLoadingState;
+  loadingState: LoadingState;
 }

@@ -1,10 +1,11 @@
 import { IUser } from './types/state';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { AuthApi } from './../../../services/api/authApi';
+import { AuthApi } from '@services/api/authApi';
 import { UserActions } from './slice';
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { ILoginFormProps } from '../../../pages/SignIn/components/LoginModal';
-import { LoadingState } from '../../types';
+import { LoadingState } from '@store/types';
+import { ILoginFormProps } from '@pages/SignIn/components/LoginModal';
+import { IRegisterFormProps } from '@pages/SignIn/components/RegisterModal';
 
 function* fetchUserDataRequest({ payload }: PayloadAction<ILoginFormProps>) {
   try {
@@ -16,6 +17,16 @@ function* fetchUserDataRequest({ payload }: PayloadAction<ILoginFormProps>) {
   }
 }
 
+function* fetchSignUp({ payload }: PayloadAction<IRegisterFormProps>) {
+  try {
+    const data: IUser = yield call(AuthApi.signUp, payload);
+    yield put(UserActions.setUserData(data));
+  } catch (error) {
+    yield put(UserActions.setLoadingState(LoadingState.ERROR));
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(UserActions.fetchUserData.type, fetchUserDataRequest);
+  yield takeLatest(UserActions.fetchSignUp.type, fetchSignUp);
 }
