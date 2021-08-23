@@ -1,22 +1,14 @@
 import React, { FC, useEffect } from 'react';
 
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Avatar from '@material-ui/core/Avatar';
 
 import SearchIcon from '@material-ui/icons/SearchOutlined';
-import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 
 import { useStyles } from './styles';
 import Tweet from '@components/Tweet';
@@ -25,6 +17,8 @@ import AddTweetForm from '@components/AddTweetForm';
 import { SearchTextField } from '@components/SearchTextField';
 import BackButton from '@components/BackButton';
 import FullTweet from '@components/FullTweet';
+import RandomUsers from '@components/RandomUsers';
+import Tags from '@components/Tags';
 
 import { TweetsActions } from '@store/ducks/tweets/slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,12 +32,6 @@ const Home: FC<Props> = ({}) => {
   const tweets = useSelector(TweetsSelectors.selectTweetsItems);
   const isTweetsLoading = useSelector(TweetsSelectors.selectIsTweetsLoading);
   const dispatch = useDispatch();
-
-  const rightSideListItems = [
-    'Твитов: 3 331',
-    'Твитов: 3 1231',
-    'Твитов: 6 451',
-  ];
 
   useEffect(() => {
     dispatch(TweetsActions.fetchTweets());
@@ -106,60 +94,8 @@ const Home: FC<Props> = ({}) => {
               }}
               fullWidth
             />
-            <Paper className={styles.rightSideBlock}>
-              <Paper className={styles.rightSideBlockHeader} variant="outlined">
-                <b>Актуальные темы</b>
-              </Paper>
-              <List>
-                {rightSideListItems.map((text, index) => (
-                  <React.Fragment key={index}>
-                    <ListItem className={styles.rightSideBlockItem}>
-                      <ListItemText
-                        primary="Санкт-Петербург"
-                        secondary={
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            color="textSecondary"
-                          >
-                            {text}
-                          </Typography>
-                        }
-                      />
-                    </ListItem>
-                    <Divider component="li" />
-                  </React.Fragment>
-                ))}
-              </List>
-            </Paper>
-            <Paper className={styles.rightSideBlock}>
-              <Paper className={styles.rightSideBlockHeader} variant="outlined">
-                <b>Кого читать</b>
-              </Paper>
-              <List>
-                <ListItem className={styles.rightSideBlockItem}>
-                  <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Dock Of Shame"
-                    secondary={
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        color="textSecondary"
-                      >
-                        @FavDockOfShame
-                      </Typography>
-                    }
-                  />
-                  <Button color="primary">
-                    <PersonAddIcon />
-                  </Button>
-                </ListItem>
-                <Divider component="li" />
-              </List>
-            </Paper>
+            {/* <Tags /> */}
+            <RandomUsers />
           </div>
         </Grid>
       </Grid>
