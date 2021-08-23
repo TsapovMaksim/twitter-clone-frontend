@@ -34,6 +34,7 @@ const loginFormSchema = yup.object().shape({
     .min(6, 'Минимальная длина пароля 6 символов')
     .required(),
 });
+
 const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -45,17 +46,17 @@ const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
   } = useForm<ILoginFormProps>({
     resolver: yupResolver(loginFormSchema),
   });
+  const isSubmitButtonDisabled = loadingStatus === LoadingState.LOADING;
 
   const onSubmit = handleSubmit(async data => {
-    try {
-      // const userData = await AuthApi.signIn(data);
-      dispatch(UserActions.fetchUserData(data));
-      handleCloseModal();
-    } catch (error) {}
+    dispatch(UserActions.fetchUserData(data));
   });
 
   useEffect(() => {
     if (loadingStatus === LoadingState.SUCCESS) {
+      handleCloseModal();
+    } else if (loadingStatus === LoadingState.ERROR) {
+      console.log('Error login');
     }
   }, [loadingStatus]);
 
@@ -121,9 +122,10 @@ const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
               variant="contained"
               color="primary"
               type="submit"
+              disabled={isSubmitButtonDisabled}
               fullWidth
             >
-              Войти
+              Регистрация
             </Button>
           </FormGroup>
         </FormControl>
