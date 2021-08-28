@@ -26,6 +26,9 @@ const userSlice = createSlice({
     fetchSignUp(state, action: PayloadAction<IRegisterFormProps>) {
       state.loadingState = LoadingState.LOADING;
     },
+    fetchAuthUser(state) {
+      state.loadingState = LoadingState.LOADING;
+    },
   },
 });
 

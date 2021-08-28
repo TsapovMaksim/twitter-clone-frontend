@@ -125,7 +125,7 @@ const LoginModal: FC<LoginModalProps> = ({ open, handleCloseModal }) => {
               disabled={isSubmitButtonDisabled}
               fullWidth
             >
-              Регистрация
+              Войти
             </Button>
           </FormGroup>
         </FormControl>

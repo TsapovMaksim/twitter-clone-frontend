@@ -25,4 +25,10 @@ export const AuthApi = {
 
     return data.data;
   },
+
+  async getMe(): Promise<IUser> {
+    const { data } = await axios.get<Response<IUser>>('users/me');
+
+    return data.data;
+  },
 };
