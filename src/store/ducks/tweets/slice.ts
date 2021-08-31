@@ -1,3 +1,4 @@
+import { IFetchAddTweetData } from './types/actions';
 import { LoadingState } from '@store/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITweet, ITweetsState } from './types/state';
@@ -30,7 +31,7 @@ const tweets = createSlice({
       state.items = [action.payload, ...state.items];
       state.addFromState = LoadingState.LOADED;
     },
-    fetchAddTweet(state, action: PayloadAction<string>) {
+    fetchAddTweet(state, action: PayloadAction<IFetchAddTweetData>) {
       state.addFromState = LoadingState.LOADING;
     },
   },
