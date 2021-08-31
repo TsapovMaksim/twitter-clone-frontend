@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { IImageObj } from '@components/AddTweetForm';
 import { useStyles } from './styles';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -7,23 +6,25 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 interface Props {
-  images: IImageObj[];
-  removeImage: (url: string) => void;
+  images: string[];
+  removeImage?: (url: string) => void;
 }
 
 const ImageList: FC<Props> = ({ images, removeImage }) => {
   const styles = useStyles();
   return (
     <div className={styles.imagesList}>
-      {images.map(({ blobUrl }) => (
+      {images.map(url => (
         <div
-          key={blobUrl}
+          key={url}
           className={styles.imagesListItem}
-          style={{ backgroundImage: `url(${blobUrl})` }}
+          style={{ backgroundImage: `url(${url})` }}
         >
-          <IconButton onClick={() => removeImage(blobUrl)}>
-            <RemoveCircleIcon style={{ fontSize: 18 }} />
-          </IconButton>
+          {removeImage ? (
+            <IconButton onClick={() => removeImage(url)}>
+              <RemoveCircleIcon style={{ fontSize: 18 }} />
+            </IconButton>
+          ) : null}
         </div>
       ))}
     </div>

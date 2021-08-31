@@ -14,6 +14,7 @@ interface Props {
 
 const UploadImages: FC<Props> = ({ images, onChangeImages }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const imageUrls = images.map(obj => obj.blobUrl);
 
   const handleUploadClick = () => {
     if (inputRef.current) {
@@ -53,7 +54,7 @@ const UploadImages: FC<Props> = ({ images, onChangeImages }) => {
       <IconButton onClick={handleUploadClick} color="primary">
         <ImageOutlinedIcon style={{ fontSize: 26 }} />
       </IconButton>
-      <ImageList images={images} removeImage={removeImage} />
+      <ImageList images={imageUrls} removeImage={removeImage} />
     </>
   );
 };

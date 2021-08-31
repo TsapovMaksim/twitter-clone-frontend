@@ -19,7 +19,9 @@ import { ITweet } from '@store/ducks/tweets/types/state';
 import { useHistory } from 'react-router-dom';
 import { formatDate } from '@utils/formatDate';
 
-const Tweet: FC<ITweet> = ({ user, text, _id, createdAt }) => {
+import ImageList from '@components/ImageList';
+
+const Tweet: FC<ITweet> = ({ user, text, _id, createdAt, images }) => {
   const styles = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -110,6 +112,7 @@ const Tweet: FC<ITweet> = ({ user, text, _id, createdAt }) => {
           </Typography>
           <Typography variant="body1" gutterBottom>
             {text}
+            <ImageList images={images} />
           </Typography>
           <Box className={styles.tweetFooter}>
             {buttonIcons.map(({ Icon, label, onClick }, index) => (

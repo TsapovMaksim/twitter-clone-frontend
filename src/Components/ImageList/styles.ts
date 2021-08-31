@@ -4,7 +4,6 @@ export const useStyles = makeStyles(theme => ({
   imagesList: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     flexWrap: 'wrap',
     marginTop: 20,
     '& img': {
