@@ -34,6 +34,9 @@ const tweets = createSlice({
     fetchAddTweet(state, action: PayloadAction<IFetchAddTweetData>) {
       state.addFromState = LoadingState.LOADING;
     },
+    removeTweet(state, action: PayloadAction<string>) {
+      state.items = state.items.filter(({ _id }) => _id !== action.payload);
+    },
   },
 });
 

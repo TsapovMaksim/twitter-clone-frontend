@@ -30,4 +30,8 @@ export const TweetsApi = {
 
     return tweet.data;
   },
+
+  async removeTweet(id: string): Promise<void> {
+    axios.delete(`/tweets/${id}`);
+  },
 };

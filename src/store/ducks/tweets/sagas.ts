@@ -24,7 +24,16 @@ function* fetchAddTweetRequest(action: PayloadAction<IFetchAddTweetData>) {
   }
 }
 
+function* fetchRemoveTweetRequest(action: PayloadAction<string>) {
+  try {
+    yield call(TweetsApi.removeTweet, action.payload);
+  } catch (error) {
+    alert('Ошибка при удалении твита(');
+  }
+}
+
 export function* tweetsSaga() {
   yield takeLatest(TweetsActions.fetchTweets.type, fetchTweetsRequest);
   yield takeLatest(TweetsActions.fetchAddTweet.type, fetchAddTweetRequest);
+  yield takeLatest(TweetsActions.removeTweet.type, fetchRemoveTweetRequest);
 }

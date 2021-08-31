@@ -1,4 +1,6 @@
 import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -14,16 +16,18 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import { useStyles } from './styles';
 import { ITweet } from '@store/ducks/tweets/types/state';
-import { useHistory } from 'react-router-dom';
+import { TweetsActions } from '@store/ducks/tweets/slice';
+
 import { formatDate } from '@utils/formatDate';
 
+import { useStyles } from './styles';
 import ImageList from '@components/ImageList';
 
 const Tweet: FC<ITweet> = ({ user, text, _id, createdAt, images }) => {
   const styles = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const buttonIcons = [
@@ -69,9 +73,15 @@ const Tweet: FC<ITweet> = ({ user, text, _id, createdAt, images }) => {
     setAnchorEl(e.currentTarget);
     setIsOpen(true);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
     setIsOpen(false);
+  };
+
+  const handleRemove = () => {
+    dispatch(TweetsActions.removeTweet(_id));
+    handleClose();
   };
 
   return (
@@ -106,7 +116,7 @@ const Tweet: FC<ITweet> = ({ user, text, _id, createdAt, images }) => {
               onClose={handleClose}
               onClick={e => e.stopPropagation()}
             >
-              <MenuItem onClick={handleClose}>Удалить</MenuItem>
+              <MenuItem onClick={handleRemove}>Удалить</MenuItem>
               <MenuItem onClick={handleClose}>Изменить</MenuItem>
             </Menu>
           </Typography>
