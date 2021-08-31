@@ -1,15 +1,11 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useRef } from 'react';
 
 import IconButton from '@material-ui/core/IconButton';
 
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-
-import { uploadImage } from '@utils/uploadImage';
-
-import { useStyles } from './styles';
 
 import { IImageObj } from '@components/AddTweetForm';
+import ImageList from '@components/ImageList';
 
 interface Props {
   images: IImageObj[];
@@ -17,7 +13,6 @@ interface Props {
 }
 
 const UploadImages: FC<Props> = ({ images, onChangeImages }) => {
-  const styles = useStyles();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadClick = () => {
@@ -58,19 +53,7 @@ const UploadImages: FC<Props> = ({ images, onChangeImages }) => {
       <IconButton onClick={handleUploadClick} color="primary">
         <ImageOutlinedIcon style={{ fontSize: 26 }} />
       </IconButton>
-      <div className={styles.imagesList}>
-        {images.map(({ blobUrl }) => (
-          <div
-            key={blobUrl}
-            className={styles.imagesListItem}
-            style={{ backgroundImage: `url(${blobUrl})` }}
-          >
-            <IconButton onClick={() => removeImage(blobUrl)}>
-              <RemoveCircleIcon style={{ fontSize: 18 }} />
-            </IconButton>
-          </div>
-        ))}
-      </div>
+      <ImageList images={images} removeImage={removeImage} />
     </>
   );
 };
