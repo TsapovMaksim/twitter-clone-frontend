@@ -29,6 +29,10 @@ const userSlice = createSlice({
     fetchAuthUser(state) {
       state.loadingState = LoadingState.LOADING;
     },
+    signOut(state) {
+      state.loadingState = LoadingState.LOADED;
+      state.data = undefined;
+    },
   },
 });
 

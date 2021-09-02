@@ -24,4 +24,10 @@ export const useStyles = makeStyles(theme => ({
   sidePropfileText: {
     color: colors.grey[500],
   },
+  menu: {
+    '& a': {
+      textDecoration: 'none',
+      color: 'inherit',
+    },
+  },
 }));
