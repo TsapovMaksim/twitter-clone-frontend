@@ -11,9 +11,11 @@ import SignIn from './pages/SignIn';
 
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Layout from '@pages/Layout';
 
 function App() {
   const history = useHistory();
+  const pathName = history.location.pathname;
   const dispatch = useDispatch();
   const isAuth = useSelector(UserSelectors.selectIsAuth);
   const loadingStatus = useSelector(UserSelectors.selectUserStatus);
@@ -28,7 +30,7 @@ function App() {
   useEffect(() => {
     if (!isAuth && isReady) {
       history.push('/signin');
-    } else {
+    } else if (pathName === '/' || pathName === '/signin') {
       history.push('/home');
     }
   }, [isAuth, isReady]);
@@ -49,8 +51,10 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/home" component={Home} />
         <Route exact path="/signin" component={SignIn} />
+        <Layout>
+          <Route path="/home" component={Home} />
+        </Layout>
       </Switch>
     </div>
   );
