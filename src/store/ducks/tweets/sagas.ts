@@ -4,6 +4,7 @@ import { ITweet } from './types/state';
 import { TweetsActions } from './slice';
 import { TweetsApi } from '@services/api/tweetsApi';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { IFetchAddTweetData } from './types/actions';
 
 function* fetchTweetsRequest() {
   try {
@@ -14,7 +15,7 @@ function* fetchTweetsRequest() {
   }
 }
 
-function* fetchAddTweetRequest(action: PayloadAction<string>) {
+function* fetchAddTweetRequest(action: PayloadAction<IFetchAddTweetData>) {
   try {
     const tweet: ITweet = yield call(TweetsApi.addTweet, action.payload);
     yield put(TweetsActions.addTweet(tweet));
@@ -23,7 +24,16 @@ function* fetchAddTweetRequest(action: PayloadAction<string>) {
   }
 }
 
+function* fetchRemoveTweetRequest(action: PayloadAction<string>) {
+  try {
+    yield call(TweetsApi.removeTweet, action.payload);
+  } catch (error) {
+    alert('Ошибка при удалении твита(');
+  }
+}
+
 export function* tweetsSaga() {
   yield takeLatest(TweetsActions.fetchTweets.type, fetchTweetsRequest);
   yield takeLatest(TweetsActions.fetchAddTweet.type, fetchAddTweetRequest);
+  yield takeLatest(TweetsActions.removeTweet.type, fetchRemoveTweetRequest);
 }

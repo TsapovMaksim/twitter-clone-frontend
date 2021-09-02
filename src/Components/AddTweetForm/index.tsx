@@ -1,24 +1,28 @@
 import React, { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Alert from '@material-ui/lab/Alert';
 
-import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
+import UploadImages from '@components/UploadImages';
 
-import classNames from 'classnames';
 import { useStyles } from './styles';
-import { useDispatch, useSelector } from 'react-redux';
 import { TweetsActions } from '@store/ducks/tweets/slice';
 import { TweetsSelectors } from '@store/ducks/tweets/selectors';
 import { LoadingState } from '@store/types';
+import { uploadImage } from '@utils/uploadImage';
 
 interface Props {
   maxRows?: number;
+}
+
+export interface IImageObj {
+  file: File;
+  blobUrl: string;
 }
 
 const MAX_LENGTH = 200;
@@ -28,6 +32,7 @@ const AddTweetForm: FC<Props> = ({ maxRows }) => {
   const dispatch = useDispatch();
 
   const [text, setText] = useState<string>('');
+  const [images, setImages] = useState<IImageObj[]>([]);
   const formLoadingState = useSelector(TweetsSelectors.selectAddFormState);
   const textLimitPercent = Math.round((text.length / 280) * 100);
   const textCount = MAX_LENGTH - text.length;
@@ -45,9 +50,19 @@ const AddTweetForm: FC<Props> = ({ maxRows }) => {
     }
   };
 
-  const handleClickAddTweet = (): void => {
-    dispatch(TweetsActions.fetchAddTweet(text));
+  const handleClickAddTweet = async () => {
+    let urls: string[] = [];
+    dispatch(TweetsActions.setAddFormLoadingState(LoadingState.LOADING));
+
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].file;
+      const { url } = await uploadImage(file);
+      urls.push(url);
+    }
+
+    dispatch(TweetsActions.fetchAddTweet({ text, images: urls }));
     setText('');
+    setImages([]);
   };
 
   return (
@@ -73,12 +88,7 @@ const AddTweetForm: FC<Props> = ({ maxRows }) => {
             styles.addFormBottomActions
           )}
         >
-          <IconButton color="primary">
-            <ImageOutlinedIcon style={{ fontSize: 26 }} />
-          </IconButton>
-          <IconButton color="primary">
-            <EmojiIcon style={{ fontSize: 26 }} />
-          </IconButton>
+          <UploadImages images={images} onChangeImages={setImages} />
         </div>
         <div className={styles.addFormBottomRight}>
           {text && (

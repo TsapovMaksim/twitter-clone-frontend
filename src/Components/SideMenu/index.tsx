@@ -22,6 +22,7 @@ import { useStyles } from './styles';
 import { Link } from 'react-router-dom';
 import ModalBlock from '@components/ModalBlock';
 import AddTweetForm from '@components/AddTweetForm';
+import UserSideProfile from '@components/UserSideProfile';
 
 interface Props {}
 
@@ -47,52 +48,55 @@ const SideMenu: FC<Props> = () => {
   };
 
   return (
-    <List className={styles.navList} style={{ maxWidth: 230 }}>
-      <ListItem disableGutters className={styles.logo}>
-        <Link to="/home">
-          <ListItemIcon>
-            <IconButton>
-              <TwitterIcon color="primary" />
-            </IconButton>
-          </ListItemIcon>
-        </Link>
-      </ListItem>
-      {listItems.map(({ text, Icon }, index) => (
-        <ListItem key={index} disableGutters className={styles.navListItem}>
-          <Hidden smDown>
-            <ListItemText
-              primaryTypographyProps={{
-                variant: 'h6',
-                component: 'h6',
-                className: styles.navListItemText,
-              }}
-              primary={text}
-            />
-          </Hidden>
-          <ListItemIcon className={styles.navListItemIcon}>
-            <Icon />
-          </ListItemIcon>
+    <>
+      <List className={styles.navList} style={{ maxWidth: 230 }}>
+        <ListItem disableGutters className={styles.logo}>
+          <Link to="/home">
+            <ListItemIcon>
+              <IconButton>
+                <TwitterIcon color="primary" />
+              </IconButton>
+            </ListItemIcon>
+          </Link>
         </ListItem>
-      ))}
-      <ListItem className={styles.navListTweetButton}>
-        <Button
-          onClick={handleTweetBtnClick}
-          variant="contained"
-          color="primary"
-          fullWidth
-        >
-          <Hidden smDown>Твитнуть</Hidden>
-          <Hidden mdUp>
-            <CreateIcon />
-          </Hidden>
-        </Button>
-      </ListItem>
-      <ModalBlock visible={isVisiblePopup} onClose={handleClosePopup}>
-        <div className={styles.addTweetFormWrapper}>
-          <AddTweetForm maxRows={15} />
-        </div>
-      </ModalBlock>
-    </List>
+        {listItems.map(({ text, Icon }, index) => (
+          <ListItem key={index} disableGutters className={styles.navListItem}>
+            <Hidden smDown>
+              <ListItemText
+                primaryTypographyProps={{
+                  variant: 'h6',
+                  component: 'h6',
+                  className: styles.navListItemText,
+                }}
+                primary={text}
+              />
+            </Hidden>
+            <ListItemIcon className={styles.navListItemIcon}>
+              <Icon />
+            </ListItemIcon>
+          </ListItem>
+        ))}
+        <ListItem className={styles.navListTweetButton}>
+          <Button
+            onClick={handleTweetBtnClick}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            <Hidden smDown>Твитнуть</Hidden>
+            <Hidden mdUp>
+              <CreateIcon />
+            </Hidden>
+          </Button>
+        </ListItem>
+        <ModalBlock visible={isVisiblePopup} onClose={handleClosePopup}>
+          <div className={styles.addTweetFormWrapper}>
+            <AddTweetForm maxRows={15} />
+          </div>
+        </ModalBlock>
+      </List>
+      <UserSideProfile />
+    </>
   );
 };
 

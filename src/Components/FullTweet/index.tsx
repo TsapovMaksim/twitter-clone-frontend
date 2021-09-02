@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
@@ -12,6 +13,8 @@ import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineO
 import RepeatOutlinedIcon from '@material-ui/icons/RepeatOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
+
+import ImageList from '@components/ImageList';
 
 import { useStyles } from './styles';
 import { CurrentTweetActions } from '@store/ducks/currentTweet/slice';
@@ -56,7 +59,7 @@ const FullTweet: FC = () => {
   }
 
   if (tweetData) {
-    const { user, text, createdAt } = tweetData;
+    const { user, text, createdAt, images } = tweetData;
     return (
       <Paper variant="outlined" className={styles.tweet}>
         <Box className={styles.tweetHeader}>
@@ -80,6 +83,7 @@ const FullTweet: FC = () => {
           <Typography className={styles.tweetText} gutterBottom>
             {text}
           </Typography>
+          <ImageList images={images} />
           <Box className={styles.tweetFooter}>
             {buttonIcons.map(({ Icon, label }, index) => (
               <Box key={index}>

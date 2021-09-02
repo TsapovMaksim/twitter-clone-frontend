@@ -26,7 +26,17 @@ function* fetchSignUp({ payload }: PayloadAction<IRegisterFormProps>) {
   }
 }
 
+function* fetchAuthUser() {
+  try {
+    const data: IUser = yield call(AuthApi.getMe);
+    yield put(UserActions.setUserData(data));
+  } catch (error) {
+    yield put(UserActions.setLoadingState(LoadingState.ERROR));
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(UserActions.fetchUserData.type, fetchUserDataRequest);
   yield takeLatest(UserActions.fetchSignUp.type, fetchSignUp);
+  yield takeLatest(UserActions.fetchAuthUser.type, fetchAuthUser);
 }

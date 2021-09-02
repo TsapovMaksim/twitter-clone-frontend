@@ -1,4 +1,5 @@
 import { axios } from '@core/axios';
+import { IFetchAddTweetData } from '@store/ducks/tweets/types/actions';
 import { ITweet } from '@store/ducks/tweets/types/state';
 
 interface Response<T> {
@@ -22,11 +23,15 @@ export const TweetsApi = {
     return data.data;
   },
 
-  async addTweet(text: string): Promise<ITweet> {
+  async addTweet({ text, images }: IFetchAddTweetData): Promise<ITweet> {
     const tweet = await axios
-      .post<Response<ITweet>>('/tweets', { text })
+      .post<Response<ITweet>>('/tweets', { text, images })
       .then(({ data }) => data);
 
     return tweet.data;
+  },
+
+  async removeTweet(id: string): Promise<void> {
+    axios.delete(`/tweets/${id}`);
   },
 };
